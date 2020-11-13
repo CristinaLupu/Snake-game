@@ -15,7 +15,9 @@ class SnakeGame {
   }
 
   changeDirection(newDirection) {
-    this.directionDictionary[newDirection].apply(this);
+    if (this.directionDictionary[newDirection]) {
+      this.directionDictionary[newDirection].apply(this);
+    }
   }
 
   onSnakeMove() {
@@ -49,9 +51,9 @@ class SnakeGame {
       return true;
     } else if (top < 0) {
       return true;
-    } else if (left > this.boardEl.clientWidth - this.snakeEl.clientWidth) {
+    } else if (left >= this.boardEl.clientWidth - this.snakeEl.clientWidth) {
       return true;
-    } else if (top > this.boardEl.clientHeight - this.snakeEl.clientHeight) {
+    } else if (top >= this.boardEl.clientHeight - this.snakeEl.clientHeight) {
       return true;
     }
 
