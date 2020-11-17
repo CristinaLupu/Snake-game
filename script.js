@@ -10,12 +10,20 @@ class SnakeGame {
   speed = 15;
   intervalId;
   axis;
+  isGameOn = true;
+
+  gameOver = document.querySelector(".game-over");
 
   addEvents() {
+    this.gameOver.style.display = "none";
     addEventListener("keydown", (e) => this.changeDirection(e.code));
   }
 
   changeDirection(newDirection) {
+    if (!this.isGameOn) {
+      return;
+    }
+
     if (newDirection === "ArrowLeft" || newDirection === "ArrowRight") {
       this.axis = "X";
     } else if (newDirection === "ArrowUp" || newDirection === "ArrowDown") {
@@ -29,6 +37,8 @@ class SnakeGame {
   onSnakeMove() {
     if (this.isOutOfBorder()) {
       clearInterval(this.intervalId);
+      this.isGameOn = false;
+      this.gameOver.style.display = "block";
     }
   }
 
@@ -89,6 +99,7 @@ class SnakeGame {
     }
     return false;
   }
+
   constructor() {
     this.addEvents();
   }
